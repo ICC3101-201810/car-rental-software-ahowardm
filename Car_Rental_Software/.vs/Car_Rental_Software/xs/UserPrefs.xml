@@ -1,0 +1,14 @@
+﻿<Properties StartupConfiguration="{3028CA7B-2319-4C82-AB0F-E13A033F09CB}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Car_Rental_Software/Program.cs">
+    <Files>
+      <File FileName="Car_Rental_Software/Program.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.Car__Rental__Software PreferredExecutionTarget="MonoDevelop.Default" FirstBuild="True" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>
