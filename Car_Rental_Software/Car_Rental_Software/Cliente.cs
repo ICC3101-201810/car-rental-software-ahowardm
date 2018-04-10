@@ -13,5 +13,14 @@ namespace Car_Rental_Software
       this.puede_manejar = puede_manejar;
       this.rut = rut;
     }
+
+    public Boolean PuedeManejar{
+      get{
+        return puede_manejar;
+      }
+      set{
+        puede_manejar = value;
+      }
+    }
   }
 }
