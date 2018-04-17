@@ -1,14 +1,16 @@
 using System;
 
 namespace Car_Rental_Software{
-  class Vehiculo
+  abstract class Vehiculo
   {
-    String tipo;
+    String marca;
+    String modelo;
     Boolean arrendado;
 
-    public Vehiculo(String tipo)
+    public Vehiculo(String marca, String modelo)
     {
-      this.tipo = tipo;
+      this.marca = marca;
+      this.modelo = modelo;
       arrendado = false;
     }
 
@@ -33,18 +35,7 @@ namespace Car_Rental_Software{
 
     public override String ToString()
     {
-      return tipo + ": " + arrendado;
-    }
-
-    public String Tipo{
-      get
-      {
-        return tipo;
-      }
-      set
-      {
-        tipo = value;
-      }
+      return ": " + arrendado;
     }
   }
 }
