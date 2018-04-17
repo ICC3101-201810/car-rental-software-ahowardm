@@ -56,7 +56,7 @@ namespace Car_Rental_Software
         nuevo = CrearOrganizacion();
       else if (tipo == "persona")
         nuevo = CrearPersona();
-
+      
       clientes.Add(nuevo);
       return clientes.Count - 1;
     }
@@ -66,7 +66,28 @@ namespace Car_Rental_Software
       String razon_social = Console.ReadLine();
       Console.Write("Ingrese el rut de la empresa a ingresar: ");
       String rut = Console.ReadLine();
-      return new Empresa(rut, razon_social);
+      Empresa ret = new Empresa(rut, razon_social);
+      Console.Write("Esta empresa puede manejar autos? (s/n)");
+      String autos = Console.ReadLine();
+      if (autos == "s")
+        ret.IngresaPermiso("auto");
+      Console.Write("Esta empresa puede manejar motos? (s/n)");
+      String moto = Console.ReadLine();
+      if (moto == "s")
+        ret.IngresaPermiso("moto");
+      Console.Write("Esta empresa puede manejar camiones? (s/n)");
+      String camion = Console.ReadLine();
+      if (camion == "s")
+        ret.IngresaPermiso("camion");
+      Console.Write("Esta empresa puede manejar camionetas? (s/n)");
+      String camioneta = Console.ReadLine();
+      if (camioneta == "s")
+        ret.IngresaPermiso("camioneta");
+      Console.Write("Esta empresa puede manejar retroexcavadoras? (s/n)");
+      String retro = Console.ReadLine();
+      if (retro == "s")
+        ret.IngresaPermiso("retroexcavadora");
+      return ret;
     }
 
     static public Institucion CrearInstitucion()
@@ -75,7 +96,28 @@ namespace Car_Rental_Software
       String razon_social = Console.ReadLine();
       Console.Write("Ingrese el rut de la institucion a ingresar: ");
       String rut = Console.ReadLine();
-      return new Institucion(rut, razon_social);
+      Institucion ret = new Institucion(rut, razon_social);
+      Console.Write("Esta institucion puede manejar autos? (s/n)");
+      String autos = Console.ReadLine();
+      if (autos == "s")
+        ret.IngresaPermiso("auto");
+      Console.Write("Esta institucion puede manejar motos? (s/n)");
+      String moto = Console.ReadLine();
+      if (moto == "s")
+        ret.IngresaPermiso("moto");
+      Console.Write("Esta institucion puede manejar camiones? (s/n)");
+      String camion = Console.ReadLine();
+      if (camion == "s")
+        ret.IngresaPermiso("camion");
+      Console.Write("Esta institucion puede manejar camionetas? (s/n)");
+      String camioneta = Console.ReadLine();
+      if (camioneta == "s")
+        ret.IngresaPermiso("camioneta");
+      Console.Write("Esta institucion puede manejar retroexcavadoras? (s/n)");
+      String retro = Console.ReadLine();
+      if (retro == "s")
+        ret.IngresaPermiso("retroexcavadora");
+      return ret;
     }
 
     static public Organizacion CrearOrganizacion()
@@ -84,7 +126,28 @@ namespace Car_Rental_Software
       String razon_social = Console.ReadLine();
       Console.Write("Ingrese el rut de la organizacion a ingresar: ");
       String rut = Console.ReadLine();
-      return new Organizacion(rut, razon_social);
+      Organizacion ret = new Organizacion(rut, razon_social);
+      Console.Write("Esta organizacion puede manejar autos? (s/n)");
+      String autos = Console.ReadLine();
+      if (autos == "s")
+        ret.IngresaPermiso("auto");
+      Console.Write("Esta organizacion puede manejar motos? (s/n)");
+      String moto = Console.ReadLine();
+      if (moto == "s")
+        ret.IngresaPermiso("moto");
+      Console.Write("Esta organizacion puede manejar camiones? (s/n)");
+      String camion = Console.ReadLine();
+      if (camion == "s")
+        ret.IngresaPermiso("camion");
+      Console.Write("Esta organizacion puede manejar camionetas? (s/n)");
+      String camioneta = Console.ReadLine();
+      if (camioneta == "s")
+        ret.IngresaPermiso("camioneta");
+      Console.Write("Esta organizacion puede manejar retroexcavadoras? (s/n)");
+      String retro = Console.ReadLine();
+      if (retro == "s")
+        ret.IngresaPermiso("retroexcavadora");
+      return ret;
     }
 
     static public Persona CrearPersona()
@@ -93,9 +156,31 @@ namespace Car_Rental_Software
       String nombre = Console.ReadLine();
       Console.Write("Ingrese el apellido de la persona a ingresar: ");
       String apellido = Console.ReadLine();
-      Console.Write("Ingrese el rut de la empresa a ingresar: ");
+      Console.Write("Ingrese el rut de la persona a ingresar: ");
       String rut = Console.ReadLine();
-      return new Persona(rut, nombre, apellido);
+      Persona ret = new Persona(rut, nombre, apellido);
+      Console.Write("Esta persona puede manejar autos? (s/n)");
+      String autos = Console.ReadLine();
+      if (autos == "s")
+        ret.IngresaPermisoPersona("auto");
+      Console.Write("Esta persona puede manejar motos? (s/n)");
+      String moto = Console.ReadLine();
+      if (moto == "s")
+        ret.IngresaPermisoPersona("moto");
+      Console.Write("Esta persona puede manejar camiones? (s/n)");
+      String camion = Console.ReadLine();
+      if (camion == "s")
+        ret.IngresaPermisoPersona("camion");
+      Console.Write("Esta persona puede manejar camionetas? (s/n)");
+      String camioneta = Console.ReadLine();
+      if (camioneta == "s")
+        ret.IngresaPermisoPersona("camioneta");
+      Console.Write("Esta persona puede manejar retroexcavadoras? (s/n)");
+      String retro = Console.ReadLine();
+      if (retro == "s")
+        ret.IngresaPermisoPersona("retroexcavadora");
+
+      return ret;
     }
 
     public Boolean AgregarVehiculo(Vehiculo vehiculo){
@@ -116,14 +201,23 @@ namespace Car_Rental_Software
       }
       // Aqui ya tenemos el cliente seleccionado en la variable cliente (posicion en la lista)
       int vehiculo = SeleccionarVehiculo(vehiculos);
-
+      Console.WriteLine("El vehiculo tiene id: " + vehiculo);
+      Arrendar(vehiculos[vehiculo], clientes[cliente], arriendos);
       return false;
     }
 
-    public Boolean Arrendar(Vehiculo vehiculo, Cliente cliente){
+    static public Boolean Arrendar(Vehiculo vehiculo, Cliente cliente, List<Arriendo> arriendos){
       if (cliente.PuedeManejarVehiculo(vehiculo.tipo)){
-        arriendos.Add(new Arriendo(vehiculo, cliente, null));
-        return true;
+        Console.Write("Ingrese la cantidad de dias que quiere arrendar el vehiculo: ");
+        int cantidad_dias = Int32.Parse(Console.ReadLine());
+        if (vehiculo.Arrendar())
+        {
+          arriendos.Add(new Arriendo(vehiculo, cliente, null, DateTime.Today, cantidad_dias));
+          Console.WriteLine("Arriendo ingresado con exito.");
+          return true;
+        }
+        else
+          Console.WriteLine("El cliente " + cliente + " no tiene permiso para manejar este tipo de vehiculos.");
       }
       return false;
     }
@@ -142,7 +236,9 @@ namespace Car_Rental_Software
         try
         {
           Int32.TryParse(Console.ReadLine(), out cliente);
-          if (cliente >= 0 && cliente < clientes.Count)
+          if (cliente == -1)
+            return cliente;
+          else if (cliente >= 0 && cliente < clientes.Count)
             break;
           else
             Console.Write("Opcion no soportada ingrese nuevamente. \nid Cliente: ");
@@ -164,15 +260,15 @@ namespace Car_Rental_Software
         try{
           Int32.TryParse(Console.ReadLine(), out vehiculo);
           if (vehiculo >= 0 && vehiculo < vehiculos.Count && !vehiculos[vehiculo].arrendado)
-            break;
+            return vehiculo;
           else
-            Console.Write("Opcion no soportada ingrese nuevamente. \nid Cliente: ");
+            Console.Write("Opcion no soportada ingrese nuevamente. \nid Vehiculo: ");
         }
         catch{
           Console.Write("Opcion no soportada ingrese nuevamente. \nid Vehiculo: ");
         }
       }
-      return vehiculo;
+      //return vehiculo;
     }
 
 
@@ -188,13 +284,13 @@ namespace Car_Rental_Software
 
     static public void ImprimirVehiculos(List<Vehiculo> vehiculos){
       for (int i = 0; i < vehiculos.Count; i++){
-        Console.WriteLine(vehiculos[i]);
+        Console.WriteLine(i + ": " + vehiculos[i]);
       }
     }
 
     static public void ImprimirClientes(List<Cliente> clientes){
       for (int i = 0; i < clientes.Count; i++){
-        Console.WriteLine(clientes[i]);
+        Console.WriteLine(i + ": " + clientes[i]);
       }
     }
 

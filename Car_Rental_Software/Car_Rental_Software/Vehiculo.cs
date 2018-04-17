@@ -5,9 +5,9 @@ namespace Car_Rental_Software{
   {
     public String marca { get; set;  }
     public String modelo { get; set;  }
-    public Boolean arrendado { get; }
+    public Boolean arrendado { get; set; }
     public String tipo { get; }
-    int precio;
+    public int precio { get;  }
 
     public Vehiculo(String marca, String modelo, String tipo, int precio)
     {
@@ -26,6 +26,7 @@ namespace Car_Rental_Software{
       if (arrendado == false)
       {
         arrendado = true;
+        return true;
       }
       return false;
     }

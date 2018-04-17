@@ -15,10 +15,11 @@ namespace Car_Rental_Software{
       return apellido + " " + nombre;
     }
 
-    public Boolean IngresaPermiso(String tipo)
+    public Boolean IngresaPermisoPersona(String tipo)
     {
       if (tipo != "bus")
-        return base.IngresaPermiso(tipo);
+        return IngresaPermiso(tipo);
+      return false;
     }
   }
 }
