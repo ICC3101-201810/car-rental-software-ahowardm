@@ -100,23 +100,23 @@ namespace Car_Rental_Software
       Console.Write("Esta institucion puede manejar autos? (s/n)");
       String autos = Console.ReadLine();
       if (autos == "s")
-        ret.IngresaPermiso("auto");
+        ret.IngresaPermisoInstitucion("auto");
       Console.Write("Esta institucion puede manejar motos? (s/n)");
       String moto = Console.ReadLine();
       if (moto == "s")
-        ret.IngresaPermiso("moto");
+        ret.IngresaPermisoInstitucion("moto");
       Console.Write("Esta institucion puede manejar camiones? (s/n)");
       String camion = Console.ReadLine();
       if (camion == "s")
-        ret.IngresaPermiso("camion");
+        ret.IngresaPermisoInstitucion("camion");
       Console.Write("Esta institucion puede manejar camionetas? (s/n)");
       String camioneta = Console.ReadLine();
       if (camioneta == "s")
-        ret.IngresaPermiso("camioneta");
+        ret.IngresaPermisoInstitucion("camioneta");
       Console.Write("Esta institucion puede manejar retroexcavadoras? (s/n)");
       String retro = Console.ReadLine();
       if (retro == "s")
-        ret.IngresaPermiso("retroexcavadora");
+        ret.IngresaPermisoInstitucion("retroexcavadora");
       return ret;
     }
 
@@ -130,23 +130,23 @@ namespace Car_Rental_Software
       Console.Write("Esta organizacion puede manejar autos? (s/n)");
       String autos = Console.ReadLine();
       if (autos == "s")
-        ret.IngresaPermiso("auto");
+        ret.IngresaPermisoOrganizacion("auto");
       Console.Write("Esta organizacion puede manejar motos? (s/n)");
       String moto = Console.ReadLine();
       if (moto == "s")
-        ret.IngresaPermiso("moto");
+        ret.IngresaPermisoOrganizacion("moto");
       Console.Write("Esta organizacion puede manejar camiones? (s/n)");
       String camion = Console.ReadLine();
       if (camion == "s")
-        ret.IngresaPermiso("camion");
+        ret.IngresaPermisoOrganizacion("camion");
       Console.Write("Esta organizacion puede manejar camionetas? (s/n)");
       String camioneta = Console.ReadLine();
       if (camioneta == "s")
-        ret.IngresaPermiso("camioneta");
+        ret.IngresaPermisoOrganizacion("camioneta");
       Console.Write("Esta organizacion puede manejar retroexcavadoras? (s/n)");
       String retro = Console.ReadLine();
       if (retro == "s")
-        ret.IngresaPermiso("retroexcavadora");
+        ret.IngresaPermisoOrganizacion("retroexcavadora");
       return ret;
     }
 
@@ -201,10 +201,25 @@ namespace Car_Rental_Software
       }
       // Aqui ya tenemos el cliente seleccionado en la variable cliente (posicion en la lista)
       int vehiculo = SeleccionarVehiculo(vehiculos);
-      Console.WriteLine("El vehiculo tiene id: " + vehiculo);
+      if (vehiculo == -1)
+        return false;
+      //Console.WriteLine("El vehiculo tiene id: " + vehiculo);
       Arrendar(vehiculos[vehiculo], clientes[cliente], arriendos);
       return false;
     }
+
+    public Boolean AdministraDevolucion(){
+      int cliente = SeleccionarCliente(clientes);
+      for (int i = 0; i < arriendos.Count; i++)
+        if (arriendos[i].cliente.rut == clientes[cliente].rut)
+        {
+          arriendos[i].vehiculo.Devolver();
+          Console.WriteLine("Devolucion ingresada con exito.");
+          return true;
+        }
+        return false;
+    }
+
 
     static public Boolean Arrendar(Vehiculo vehiculo, Cliente cliente, List<Arriendo> arriendos){
       if (cliente.PuedeManejarVehiculo(vehiculo.tipo)){
@@ -252,14 +267,16 @@ namespace Car_Rental_Software
     }
 
     static private int SeleccionarVehiculo(List<Vehiculo> vehiculos){
-      Console.WriteLine("Seleccione el id del vehiculo que va a arrendar: ");
+      Console.WriteLine("Seleccione el id del vehiculo (-1 para volver al menu principal): ");
       ImprimirVehiculos(vehiculos);
       int vehiculo = 0;
       Console.Write("id vehiculo: ");
       while(true){
         try{
           Int32.TryParse(Console.ReadLine(), out vehiculo);
-          if (vehiculo >= 0 && vehiculo < vehiculos.Count && !vehiculos[vehiculo].arrendado)
+          if (vehiculo == -1)
+            return -1;
+          else if (vehiculo >= 0 && vehiculo < vehiculos.Count && !vehiculos[vehiculo].arrendado)
             return vehiculo;
           else
             Console.Write("Opcion no soportada ingrese nuevamente. \nid Vehiculo: ");

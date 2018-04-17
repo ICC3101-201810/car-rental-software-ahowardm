@@ -2,8 +2,8 @@ using System;
 
 namespace Car_Rental_Software{
   class Arriendo{
-    Vehiculo vehiculo;
-    Cliente cliente;
+    public Vehiculo vehiculo { get; }
+    public Cliente cliente { get; }
     Accesorio accesorio;
     int precio;
     DateTime arriendo, devolucion;

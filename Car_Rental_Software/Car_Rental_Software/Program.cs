@@ -27,8 +27,12 @@ namespace Car_Rental_Software
             CrearSucursal(sucursales);
             break;
           case 2:
-            // Editar una sucursal
-            //sucursal_editar = SeleccionarSucursal(sucursales, "editar su nombre");
+            // Devolver un vehiculo
+            sucursal = SeleccionarSucursal(sucursales, "devolver sus vehiculos");
+            if (sucursal != -1)
+            {
+              sucursales[sucursal].AdministraDevolucion();
+            }
             break;
           case 3:
             //Arrendar un vehiculo
@@ -179,7 +183,7 @@ namespace Car_Rental_Software
       Dictionary<int, String> opciones_validas = new Dictionary<int, string>();
       opciones_validas.Add(-1, "Salir");
       opciones_validas.Add(1, "Crear una sucursal");
-      //opciones_validas.Add(2, "Editar una sucursal");
+      opciones_validas.Add(2, "Devolver un vehiculo");
       opciones_validas.Add(3, "Arrendar un vehiculo");
       opciones_validas.Add(4, "Agregar vehiculo a sucursal");
 

@@ -7,6 +7,10 @@ namespace Car_Rental_Software{
     public Empresa(String rut, String razon_social) : base(rut)
     {
       this.Razon_social = razon_social;
+      if (new Random().NextDouble() >= 0.63)
+        IngresaPermiso("retroexcavadora");
+      if (new Random().NextDouble() >= 0.8)
+        IngresaPermiso("bus");
     }
 
     public override string ToString()

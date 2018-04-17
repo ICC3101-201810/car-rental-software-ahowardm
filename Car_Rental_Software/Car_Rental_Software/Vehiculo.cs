@@ -28,13 +28,17 @@ namespace Car_Rental_Software{
         arrendado = true;
         return true;
       }
+      Console.WriteLine("Vehiculo no disponible para arriendo");
       return false;
     }
 
     public Boolean Devolver()
     {
-      if (arrendado == true)
+      if (arrendado == true){
+        arrendado = false;
         return false;
+      }
+      Console.WriteLine("Vehiculo no estaba arrendado");
       return true;
     }
 

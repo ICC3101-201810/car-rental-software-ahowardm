@@ -7,7 +7,7 @@ namespace Car_Rental_Software
   {
     //Boolean puede_manejar;
     Dictionary<String, Boolean> permiso_manejar;
-    String rut;
+    public String rut { get; }
 
     public Cliente(String rut)
     {
