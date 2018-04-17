@@ -29,9 +29,24 @@ namespace Car_Rental_Software
           case 2:
             // Devolver un vehiculo
             sucursal = SeleccionarSucursal(sucursales, "devolver sus vehiculos");
-            if (sucursal != -1)
+            if (sucursales.Count == 0){
+              Console.Beep();
+              ConsoleColor color = Console.ForegroundColor;
+              Console.ForegroundColor = ConsoleColor.Red;
+              Console.WriteLine("No hay sucursales creadas para devolver vehiculos. Primero cree una sucursal.\n");
+              Console.ForegroundColor = color;
+            }
+            else if (sucursal != -1 && sucursal >= 0 && sucursal > sucursales.Count)
             {
               sucursales[sucursal].AdministraDevolucion();
+            }
+            else
+            {
+              Console.Beep();
+              ConsoleColor color = Console.ForegroundColor;
+              Console.ForegroundColor = ConsoleColor.Red;
+              Console.WriteLine("Error en la opcion ingresada.\n");
+              Console.ForegroundColor = color;
             }
             break;
           case 3:
@@ -42,7 +57,13 @@ namespace Car_Rental_Software
               sucursales[sucursal].AdministraArriendo();
             }
             else
+            {
+              Console.Beep();
+              ConsoleColor color = Console.ForegroundColor;
+              Console.ForegroundColor = ConsoleColor.Red;
               Console.WriteLine("No hay sucursales creadas para agregar vehiculos. Primero cree una sucursal.\n");
+              Console.ForegroundColor = color;
+            }
 
             break;
           case 4:
@@ -53,7 +74,13 @@ namespace Car_Rental_Software
               AgregarVehiculoASucursal(sucursales[sucursal]);
             }
             else
+            {
+              Console.Beep();
+              ConsoleColor color = Console.ForegroundColor;
+              Console.ForegroundColor = ConsoleColor.Red;
               Console.WriteLine("No hay sucursales creadas para agregar vehiculos. Primero cree una sucursal.\n");
+              Console.ForegroundColor = color;
+            }
 
             break;
         }
@@ -72,7 +99,13 @@ namespace Car_Rental_Software
       String tipo = "";
       while(true){
         if ((tipo = Console.ReadLine()) != "auto" && tipo != "moto" && tipo != "acuatico" && tipo != "camion" && tipo != "bus" && tipo != "retroexcavadora")
+        {
+          Console.Beep();
+          ConsoleColor color = Console.ForegroundColor;
+          Console.ForegroundColor = ConsoleColor.Red;
           Console.Write("Opción no soportada, ingrese nuevamente.\nTipo: ");
+          Console.ForegroundColor = color;
+        }
         else
           break;
       }
@@ -81,8 +114,22 @@ namespace Car_Rental_Software
       Console.Write("Ingrese el modelo del nuevo vehiculo: ");
       String modelo = Console.ReadLine();
 
-      if (tipo == "auto")
-        sucursal.AgregarVehiculo(new Auto(marca, modelo));
+      if (tipo == "auto"){
+        Auto nuevo = new Auto(marca, modelo);
+        Console.Write("Este nuevo auto tiene maletero grande? (s/n) ");
+        String maletero = Console.ReadLine();
+        if (maletero == "s")
+          nuevo.MaleteroGrande();
+        Console.Write("Este nuevo auto es electrico? (s/n) ");
+        String electrico = Console.ReadLine();
+        if (electrico == "s")
+          nuevo.EsElectrico();
+        Console.Write("Este nuevo auto tiene mas asientos? (s/n) ");
+        String asientos = Console.ReadLine();
+        if (asientos == "s")
+          nuevo.AsientosExtra();
+        sucursal.AgregarVehiculo(nuevo);
+      }
       else if (tipo == "moto")
         sucursal.AgregarVehiculo(new Moto(marca, modelo));
       else if (tipo == "acuatico")
@@ -126,7 +173,11 @@ namespace Car_Rental_Software
         }
         catch
         {
+          Console.Beep();
+          ConsoleColor color = Console.ForegroundColor;
+          Console.ForegroundColor = ConsoleColor.Red;
           Console.WriteLine("Opcion no soportada ingrese nuevamente ");
+          Console.ForegroundColor = color;
         }
       }
       return sucursal_editar;
@@ -145,7 +196,11 @@ namespace Car_Rental_Software
         }
         catch
         {
+          Console.Beep();
+          ConsoleColor color = Console.ForegroundColor;
+          Console.ForegroundColor = ConsoleColor.Red;
           Console.WriteLine("Opcion no soportada ingrese nuevamente ");
+          Console.ForegroundColor = color;
         }
       }
       return vehiculo_editar;
@@ -158,8 +213,16 @@ namespace Car_Rental_Software
       while(true){
         if (cnt > 0)
         {
+          Console.Beep();
+          ConsoleColor colour = Console.ForegroundColor;
+          Console.ForegroundColor = ConsoleColor.Red;
           Console.WriteLine("Opcion ingresada no es valida, por favor intente nuevamente.");
+          Console.ForegroundColor = colour;
         }
+        ConsoleColor color = Console.ForegroundColor;
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine("\n****Menu Principal****\n");
+        Console.ForegroundColor = color;
         Console.WriteLine("Seleccione una de las siguientes opciones:");
         ImprimeMenu(opciones_validas);
         Console.Write("Opcion: ");

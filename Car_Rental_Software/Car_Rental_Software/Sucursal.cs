@@ -42,7 +42,10 @@ namespace Car_Rental_Software
       String tipo = "";
       while(true){
         if ((tipo = Console.ReadLine()) != "empresa" && tipo != "institucion" && tipo != "organizacion" && tipo != "persona")
+        {
+          Console.Beep();
           Console.Write("Opción no soportada, ingrese nuevamente.\nTipo: ");
+        }
         else
           break;
       }
@@ -209,12 +212,17 @@ namespace Car_Rental_Software
     }
 
     public Boolean AdministraDevolucion(){
-      int cliente = SeleccionarCliente(clientes);
+      int cliente = SeleccionarClienteDevolucion(clientes);
+      if (arriendos.Count == 0 || cliente == -1)
+        return false;
       for (int i = 0; i < arriendos.Count; i++)
         if (arriendos[i].cliente.rut == clientes[cliente].rut)
         {
           arriendos[i].vehiculo.Devolver();
+        ConsoleColor color = Console.ForegroundColor;
+          Console.ForegroundColor = ConsoleColor.White;
           Console.WriteLine("Devolucion ingresada con exito.");
+          Console.ForegroundColor = color;
           return true;
         }
         return false;
@@ -228,11 +236,20 @@ namespace Car_Rental_Software
         if (vehiculo.Arrendar())
         {
           arriendos.Add(new Arriendo(vehiculo, cliente, null, DateTime.Today, cantidad_dias));
+          ConsoleColor color = Console.ForegroundColor;
+          Console.ForegroundColor = ConsoleColor.White;
           Console.WriteLine("Arriendo ingresado con exito.");
+          Console.ForegroundColor = color;
           return true;
         }
         else
+        {
+          Console.Beep();
+          ConsoleColor color = Console.ForegroundColor;
+          Console.ForegroundColor = ConsoleColor.Red;
           Console.WriteLine("El cliente " + cliente + " no tiene permiso para manejar este tipo de vehiculos.");
+          Console.ForegroundColor = color;
+        }
       }
       return false;
     }
@@ -251,20 +268,64 @@ namespace Car_Rental_Software
         try
         {
           Int32.TryParse(Console.ReadLine(), out cliente);
-          if (cliente == -1)
-            return cliente;
+          if (cliente == -1 || clientes.Count == 0)
+            return -1;
           else if (cliente >= 0 && cliente < clientes.Count)
             break;
           else
+          {
+            Console.Beep();
             Console.Write("Opcion no soportada ingrese nuevamente. \nid Cliente: ");
+          }
         }
         catch
         {
+          Console.Beep();
           Console.Write("Opcion no soportada ingrese nuevamente. \nid Cliente: ");
         }
       }
       return cliente;
     }
+    //
+    static private int SeleccionarClienteDevolucion(List<Cliente> clientes)
+    {
+      if (clientes.Count == 0)
+      {
+        Console.Beep();
+        ConsoleColor colour = Console.ForegroundColor;
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine("No hay clientes para realizar devolucion");
+        Console.ForegroundColor = colour;
+        return -1;
+      }
+      Console.WriteLine("Seleccione el id del cliente que va a devolver: ");
+      ImprimirClientes(clientes);
+      int cliente = 0;
+      Console.Write("id Cliente: ");
+      while (true)
+      {
+        try
+        {
+          Int32.TryParse(Console.ReadLine(), out cliente);
+          if (cliente == -1)
+            return -1;
+          else if (cliente >= 0 && cliente < clientes.Count)
+            break;
+          else
+          {
+            Console.Beep();
+            Console.Write("Opcion no soportada ingrese nuevamente. \nid Cliente: ");
+          }
+        }
+        catch
+        {
+          Console.Beep();
+          Console.Write("Opcion no soportada ingrese nuevamente. \nid Cliente: ");
+        }
+      }
+      return cliente;
+    }
+    //
 
     static private int SeleccionarVehiculo(List<Vehiculo> vehiculos){
       Console.WriteLine("Seleccione el id del vehiculo (-1 para volver al menu principal): ");
@@ -279,9 +340,13 @@ namespace Car_Rental_Software
           else if (vehiculo >= 0 && vehiculo < vehiculos.Count && !vehiculos[vehiculo].arrendado)
             return vehiculo;
           else
+          {
+            Console.Beep();
             Console.Write("Opcion no soportada ingrese nuevamente. \nid Vehiculo: ");
+          }
         }
         catch{
+          Console.Beep();
           Console.Write("Opcion no soportada ingrese nuevamente. \nid Vehiculo: ");
         }
       }

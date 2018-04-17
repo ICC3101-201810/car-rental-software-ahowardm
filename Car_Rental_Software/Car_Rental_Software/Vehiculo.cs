@@ -44,7 +44,12 @@ namespace Car_Rental_Software{
 
     public override String ToString()
     {
-      return marca + ", " + modelo + ": " + arrendado;
+      String ret = marca + ", " + modelo + ": ";
+      if (!arrendado)
+        ret += "disponible";
+      else
+        ret += "arrendado";
+      return ret;
     }
   }
 }
