@@ -35,8 +35,7 @@ namespace Car_Rental_Software
             sucursal = SeleccionarSucursal(sucursales, "arrendar sus vehiculos");
             if (sucursal != -1)
             {
-              //AgregarVehiculoASucursal(sucursales[sucursal]);
-              //sucursales[sucursal_editar].AgregarVehiculo(new Vehiculo(tipo));
+              sucursales[sucursal].AdministraArriendo();
             }
             else
               Console.WriteLine("No hay sucursales creadas para agregar vehiculos. Primero cree una sucursal.\n");
@@ -87,9 +86,19 @@ namespace Car_Rental_Software
       else if (tipo == "camion")
         sucursal.AgregarVehiculo(new Camion(marca, modelo));
       else if (tipo == "bus")
-        sucursal.AgregarVehiculo(new Bus(marca, modelo));
+        sucursal.AgregarVehiculo(new Bus(marca, modelo, PideTipoBus()));
       else if (tipo == "retroexcavadora")
         sucursal.AgregarVehiculo(new Retroexcavadora(marca, modelo));
+    }
+
+    static public String PideTipoBus(){
+      String tipo_bus = "";
+      while (true){
+        Console.Write("Ingrese el tipo de bus a ingresar (liviano, normal o de lujo): ");
+        tipo_bus = Console.ReadLine();
+        if (tipo_bus != "liviano" || tipo_bus != "normal" || tipo_bus != "de lujo")
+          return tipo_bus;
+      }
     }
 
     static private int SeleccionarSucursal(List<Sucursal> sucursales, String objetivo){

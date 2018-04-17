@@ -5,15 +5,17 @@ namespace Car_Rental_Software{
   {
     public String marca { get; set;  }
     public String modelo { get; set;  }
-    Boolean arrendado;
+    public Boolean arrendado { get; }
     public String tipo { get; }
+    int precio;
 
-    public Vehiculo(String marca, String modelo, String tipo)
+    public Vehiculo(String marca, String modelo, String tipo, int precio)
     {
       this.marca = marca;
       this.modelo = modelo;
       arrendado = false;
       this.tipo = tipo;
+      this.precio = precio;
     }
 
     /****************************************
@@ -37,7 +39,7 @@ namespace Car_Rental_Software{
 
     public override String ToString()
     {
-      return ": " + arrendado;
+      return marca + ", " + modelo + ": " + arrendado;
     }
   }
 }

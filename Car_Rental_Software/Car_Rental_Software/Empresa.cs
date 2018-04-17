@@ -9,5 +9,9 @@ namespace Car_Rental_Software{
       this.Razon_social = razon_social;
     }
 
+    public override string ToString()
+    {
+      return Razon_social;
+    }
   }
 }

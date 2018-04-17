@@ -9,5 +9,16 @@ namespace Car_Rental_Software{
       this.nombre = nombre;
       this.apellido = apellido;
     }
+
+    public override string ToString()
+    {
+      return apellido + " " + nombre;
+    }
+
+    public Boolean IngresaPermiso(String tipo)
+    {
+      if (tipo != "bus")
+        return base.IngresaPermiso(tipo);
+    }
   }
 }
