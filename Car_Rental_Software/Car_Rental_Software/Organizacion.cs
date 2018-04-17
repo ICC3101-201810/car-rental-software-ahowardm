@@ -2,11 +2,11 @@ using System;
 
 namespace Car_Rental_Software{
   class Organizacion : Cliente{
-    String razon_social;
+    public String Razon_social { get; set; }
 
-    public Organizacion(Boolean autorizacion, String rut, String razon_social) : base(rut)
+    public Organizacion(String rut, String razon_social) : base(rut)
     {
-      this.razon_social = razon_social;
+      this.Razon_social = razon_social;
     }
   }
 }

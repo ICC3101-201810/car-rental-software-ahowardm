@@ -3,15 +3,17 @@ using System;
 namespace Car_Rental_Software{
   abstract class Vehiculo
   {
-    String marca;
-    String modelo;
+    public String marca { get; set;  }
+    public String modelo { get; set;  }
     Boolean arrendado;
+    public String tipo { get; }
 
-    public Vehiculo(String marca, String modelo)
+    public Vehiculo(String marca, String modelo, String tipo)
     {
       this.marca = marca;
       this.modelo = modelo;
       arrendado = false;
+      this.tipo = tipo;
     }
 
     /****************************************

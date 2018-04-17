@@ -16,7 +16,7 @@ namespace Car_Rental_Software
       while (true)
       {
         opcion = SeleccionaOpcion(GeneraOpciones());
-        int sucursal_editar = 0;
+        int sucursal = 0;
         switch (opcion)
         {
           case -1:
@@ -32,15 +32,25 @@ namespace Car_Rental_Software
             break;
           case 3:
             //Arrendar un vehiculo
-            sucursal_editar = SeleccionarSucursal(sucursales, "arrendar sus vehiculos");
-
+            sucursal = SeleccionarSucursal(sucursales, "arrendar sus vehiculos");
+            if (sucursal != -1)
+            {
+              //AgregarVehiculoASucursal(sucursales[sucursal]);
+              //sucursales[sucursal_editar].AgregarVehiculo(new Vehiculo(tipo));
+            }
+            else
+              Console.WriteLine("No hay sucursales creadas para agregar vehiculos. Primero cree una sucursal.\n");
 
             break;
           case 4:
             //Agregar vehiculo a sucursal
-            int sucursal = SeleccionarSucursal(sucursales, "agregar un vehiculo");
-            AgregarVehiculoASucursal(sucursales[sucursal]);
-            //sucursales[sucursal_editar].AgregarVehiculo(new Vehiculo(tipo));
+            sucursal = SeleccionarSucursal(sucursales, "agregar un vehiculo");
+            if (sucursal != -1)
+            {
+              AgregarVehiculoASucursal(sucursales[sucursal]);
+            }
+            else
+              Console.WriteLine("No hay sucursales creadas para agregar vehiculos. Primero cree una sucursal.\n");
 
             break;
         }
@@ -55,10 +65,11 @@ namespace Car_Rental_Software
 
     static private void AgregarVehiculoASucursal(Sucursal sucursal){
       Console.WriteLine("Ingrese el tipo de vehiculo (puede ser auto, moto, acuatico, camion, bus o retroexcavadora)");
+      Console.Write("Tipo: ");
       String tipo = "";
       while(true){
         if ((tipo = Console.ReadLine()) != "auto" && tipo != "moto" && tipo != "acuatico" && tipo != "camion" && tipo != "bus" && tipo != "retroexcavadora")
-          Console.WriteLine("Opción no soportada, ingrese nuevamente");
+          Console.Write("Opción no soportada, ingrese nuevamente.\nTipo: ");
         else
           break;
       }
@@ -84,12 +95,15 @@ namespace Car_Rental_Software
     static private int SeleccionarSucursal(List<Sucursal> sucursales, String objetivo){
       Console.WriteLine("Seleccione el id de la sucursal para " + objetivo + ": ");
       int i = 0;
+      if (sucursales.Count == 0)
+        return -1;
       foreach (var sucursal in sucursales)
       {
         Console.WriteLine(i + ": " + sucursal);
         i++;
       }
       int sucursal_editar = 0;
+      Console.Write("id Sucursal: ");
       while (true)
       {
         try

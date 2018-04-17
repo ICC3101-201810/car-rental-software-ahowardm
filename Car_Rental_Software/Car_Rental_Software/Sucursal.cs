@@ -47,8 +47,8 @@ namespace Car_Rental_Software
     }
 
     public Boolean Arrendar(Vehiculo vehiculo, Cliente cliente){
-      if (cliente.PuedeManejar && vehiculo.Arrendar()){
-        arriendos.Add(new Arriendo(vehiculo, cliente));
+      if (cliente.PuedeManejarVehiculo(vehiculo.tipo)){
+        arriendos.Add(new Arriendo(vehiculo, cliente, null));
         return true;
       }
       return false;
