@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Car_Rental_Software
 {
@@ -203,11 +204,54 @@ namespace Car_Rental_Software
         cliente = AgregarCliente(clientes);
       }
       // Aqui ya tenemos el cliente seleccionado en la variable cliente (posicion en la lista)
-      int vehiculo = SeleccionarVehiculo(vehiculos);
-      if (vehiculo == -1)
+      Console.WriteLine("Desea ver todos los vehiculos o solo los autos? (auto/todos)");
+      String opcion = Console.ReadLine();
+      if (opcion == "auto"){
+        Console.Write("Quiere que el auto tenga asientos extra? (s/n)");
+        Boolean quiere_asientos = false;
+        if (Console.ReadLine() == "s")
+          quiere_asientos = true;
+        Console.Write("Quiere que el auto sea electrico? (s/n)");
+        Boolean quiere_electrico = false;
+        if (Console.ReadLine() == "s")
+          quiere_electrico = true;
+        Console.Write("Quiere que el auto tenga maletero grande? (s/n)");
+        Boolean quiere_maletero = false;
+        if (Console.ReadLine() == "s")
+          quiere_maletero = true;
+        
+        List<Vehiculo> autos_temp =(from veh in vehiculos
+                                      //where veh.tipo == "auto"
+                                    where veh.GetType() == typeof(Auto)
+                                    select veh).ToList();
+        List<Auto> autos_temp2 = new List<Auto>();
+        foreach (var item in autos_temp)
+        {
+          autos_temp2.Add((Auto)item);
+        }
+
+        List<Auto> autos = (from a in autos_temp2
+                     where a.electrico == quiere_electrico && a.asientos_extra == quiere_asientos && a.maletero_grande == quiere_maletero
+                    select a).ToList();
+        List<Vehiculo> autos_vehiculo = new List<Vehiculo>();
+        foreach (var item in autos)
+        {
+          autos_vehiculo.Add(item);
+        }
+        int vehiculo = SeleccionarVehiculo(autos_vehiculo);
+        if (vehiculo == -1)
+          return false;
+        Arrendar(autos[vehiculo], clientes[cliente], arriendos);
+      }
+      // Arriendo normal con todos los vehiculos
+      else {
+        int vehiculo = SeleccionarVehiculo(vehiculos);
+        if (vehiculo == -1)
+          return false;
+        //Console.WriteLine("El vehiculo tiene id: " + vehiculo);
+        Arrendar(vehiculos[vehiculo], clientes[cliente], arriendos);
         return false;
-      //Console.WriteLine("El vehiculo tiene id: " + vehiculo);
-      Arrendar(vehiculos[vehiculo], clientes[cliente], arriendos);
+      }
       return false;
     }
 

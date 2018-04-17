@@ -1,8 +1,11 @@
 using System;
 
 namespace Car_Rental_Software{
-  class Auto : Vehiculo{
-    Boolean asientos_extra, maletero_grande, electrico;
+  class Auto : Vehiculo
+  {
+    public Boolean asientos_extra { get; set; }
+    public Boolean maletero_grande { get; set; }
+    public Boolean electrico { get; set; }
 
     public Auto(String marca, String modelo) : base(marca, modelo, "auto", 25000){
       asientos_extra = false;
